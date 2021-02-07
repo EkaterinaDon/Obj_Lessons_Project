@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C457A5A125D0211200E12FFA /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = C457A5A025D0211200E12FFA /* Category.m */; };
+		C4713B8F25D00EFC00BD7124 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = C4713B8E25D00EFC00BD7124 /* Student.m */; };
 		C4FE04AC25C6C27900C97584 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE04AB25C6C27900C97584 /* AppDelegate.m */; };
 		C4FE04AF25C6C27900C97584 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE04AE25C6C27900C97584 /* SceneDelegate.m */; };
 		C4FE04B225C6C27900C97584 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE04B125C6C27900C97584 /* ViewController.m */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C457A5A025D0211200E12FFA /* Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		C4713B8D25D00EFC00BD7124 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		C4713B8E25D00EFC00BD7124 /* Student.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		C4FE04A725C6C27900C97584 /* Obj_Lessons_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Obj_Lessons_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FE04AA25C6C27900C97584 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C4FE04AB25C6C27900C97584 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,6 +72,9 @@
 				C4FE04AE25C6C27900C97584 /* SceneDelegate.m */,
 				C4FE04B025C6C27900C97584 /* ViewController.h */,
 				C4FE04B125C6C27900C97584 /* ViewController.m */,
+				C457A5A025D0211200E12FFA /* Category.m */,
+				C4713B8D25D00EFC00BD7124 /* Student.h */,
+				C4713B8E25D00EFC00BD7124 /* Student.m */,
 				C4FE04B325C6C27900C97584 /* Main.storyboard */,
 				C4FE04B625C6C27B00C97584 /* Assets.xcassets */,
 				C4FE04B825C6C27B00C97584 /* LaunchScreen.storyboard */,
@@ -146,7 +154,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4FE04B225C6C27900C97584 /* ViewController.m in Sources */,
+				C457A5A125D0211200E12FFA /* Category.m in Sources */,
 				C4FE04AC25C6C27900C97584 /* AppDelegate.m in Sources */,
+				C4713B8F25D00EFC00BD7124 /* Student.m in Sources */,
 				C4FE04BD25C6C27B00C97584 /* main.m in Sources */,
 				C4FE04AF25C6C27900C97584 /* SceneDelegate.m in Sources */,
 			);

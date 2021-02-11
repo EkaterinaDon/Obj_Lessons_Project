@@ -6,43 +6,53 @@
 //
 
 #import "ViewController.h"
-#import "Student.h"
+
 
 @interface ViewController ()
 
 @end
+
+typedef enum Metod metod;
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    Student *president44 = [[Student alloc] initWithName:@"Barack" surname:@"Obama" age:59];
-    Student *president45 = [[Student alloc] initWithName:@"Donald" surname:@"Trump" age:74];
-    Student *president46 = [[Student alloc] initWithName:@"Joe" surname:@"Biden" age:78];
+    //1. Изменить созданный калькулятор из предыдущих уроков на ручное управление памятью.
+    Calculator *calculator = [[Calculator alloc] init];
+    NSNumber *value1 = [[NSNumber alloc] initWithDouble:(CGFloat)5];
+    NSNumber *value2 = [[NSNumber alloc] initWithDouble:(CGFloat)2];
     
-    NSMutableArray *allStudents = [NSMutableArray arrayWithObjects:president44, president45, president46, nil];
+    NSNumber *divide = [calculator calculate:Division with:value1 and:value2];
+    [calculator release];
+    [divide release];
     
-    [president45 incrAge:1];
+    //2. Смоделировать и разработать программу для стаи птиц (на основе практического задания) с применением ручного управления памятью.
+    Flock *flock = [[Flock alloc] init];
     
-    for (Student *student in allStudents) {
-        NSLog(@"%@", student.description);
-    }
+    Wing *eagleWings = [[Wing alloc] initWithNumber:@2];
+    Bird *eagle = [[Bird alloc] initWithBreed:@"Eagle" andWing:eagleWings];
     
-    president44 = nil;
-    president45 = nil;
-    president46 = nil;
+    Wing *crowWings = [[Wing alloc] initWithNumber:@2];
+    Bird *crow = [[Bird alloc] initWithBreed:@"Crow" andWing:crowWings];
+    
+    NSArray *birds = [[NSArray alloc] initWithObjects:eagle, crow, nil];
+    [flock configure: birds];
+    
+    [flock release];
+    
+    
+    
 }
+
+    
+
 
 
 @end
 
 
-//1. Создать программу, которая будет выводить список студентов. Для этого необходимо создать класс Студент, а значения свойств устанавливать, используя собственный конструктор.
-//2. У студента должно быть свойство age (возраст), оно должно быть только для чтения
-//3. У студента должны быть свойства name, surname и fullName. Первые два должны быть обычными свойствами, а fullName должно возвращать строку состоящую из склеенных name и surname.
-//4. Переопределите метод description чтобы при выводе объекта в NSLog выводилась информация по всем его свойствам.
-//5. Добавьте метод который будет увеличивать его возраст. (Да свойство age только для чтения).
 
 
 

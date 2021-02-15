@@ -6,6 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Calculator.h"
+#import "Wing.h"
+#import "Bird.h"
+#import "Flock.h"
+
 
 @interface ViewController : UIViewController
 

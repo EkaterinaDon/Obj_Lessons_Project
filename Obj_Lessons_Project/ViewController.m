@@ -18,31 +18,46 @@ typedef enum Metod metod;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+   // 1. Попрактиковаться с применением блоков и создать любую программу с ними (минимум 6 блоков).
     
-    //1. Изменить созданный калькулятор из предыдущих уроков на ручное управление памятью.
-    Calculator *calculator = [[Calculator alloc] init];
-    NSNumber *value1 = [[NSNumber alloc] initWithDouble:(CGFloat)5];
-    NSNumber *value2 = [[NSNumber alloc] initWithDouble:(CGFloat)2];
+    [Calculator calculate:Division with:[NSNumber numberWithInteger:10] and:[NSNumber numberWithInteger:3]];
     
-    NSNumber *divide = [calculator calculate:Division with:value1 and:value2];
-    [calculator release];
-    [divide release];
+    [Calculator calculate:RemainderOfDivision with:[NSNumber numberWithInteger:10] and:[NSNumber numberWithInteger:3]];
     
-    //2. Смоделировать и разработать программу для стаи птиц (на основе практического задания) с применением ручного управления памятью.
-    Flock *flock = [[Flock alloc] init];
+//     2. Добавить выполнение блоков в различные очереди: как с применением GCD, так и с помощью NSOperationQueue
     
-    Wing *eagleWings = [[Wing alloc] initWithNumber:@2];
-    Bird *eagle = [[Bird alloc] initWithBreed:@"Eagle" andWing:eagleWings];
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t slow = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+    dispatch_queue_t fast = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
     
-    Wing *crowWings = [[Wing alloc] initWithNumber:@2];
-    Bird *crow = [[Bird alloc] initWithBreed:@"Crow" andWing:crowWings];
+    dispatch_sync(slow, ^{
+        [Calculator calculate:Division with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
+    });
     
-    NSArray *birds = [[NSArray alloc] initWithObjects:eagle, crow, nil];
-    [flock configure: birds];
+    dispatch_sync(fast, ^{
+        [Calculator calculate:Multiplication with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
+    });
     
-    [flock release];
+    dispatch_group_async(group, queue, ^{
+        [Calculator calculate:Sum with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
+    });
     
+    dispatch_group_async(group, queue, ^{
+        [Calculator calculate:Subtraction with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
+    });
     
+    NSOperationQueue *current = [NSOperationQueue currentQueue];
+    NSOperationQueue *main = [NSOperationQueue mainQueue];
+    
+    [current addOperationWithBlock:^{
+        [Calculator calculate:Division with:[NSNumber numberWithInteger:50] and:[NSNumber numberWithInteger:5]];
+    }];  // если таким способом добавлять в очередь зависимость сделать не получится?
+    
+    [main addOperationWithBlock:^{
+        [Calculator calculate:Subtraction with:[NSNumber numberWithInteger:50] and:[NSNumber numberWithInteger:5]];
+    }];
     
 }
 

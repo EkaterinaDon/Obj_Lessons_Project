@@ -9,21 +9,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSNumber * _Null_unspecified (^CalculatorBlock) (NSNumber *value1, NSNumber *value2);
+
 enum Metod {
     Sum,
     Subtraction,
     Multiplication,
-    Division
+    Division,
+    RemainderOfDivision
 };
 
 typedef enum Metod metod;
 
 @interface Calculator : NSObject
 
-@property (nonatomic, strong) NSNumber *value1;
-@property (nonatomic, strong) NSNumber *value2;
-
-- (NSNumber *)calculate:(metod)metod with:(NSNumber *)value1 and:(NSNumber *)value2;
++ (NSNumber *)calculate:(metod)metod with:(NSNumber *)value1 and:(NSNumber *)value2;
 
 @end
 

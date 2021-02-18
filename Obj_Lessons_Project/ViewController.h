@@ -10,10 +10,12 @@
 #import "Wing.h"
 #import "Bird.h"
 #import "Flock.h"
+#import "Student.h"
 
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, strong) NSString *directory;
 
 @end
 

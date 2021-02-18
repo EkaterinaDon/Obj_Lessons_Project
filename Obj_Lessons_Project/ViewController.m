@@ -19,49 +19,40 @@ typedef enum Metod metod;
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-   // 1. Попрактиковаться с применением блоков и создать любую программу с ними (минимум 6 блоков).
+//1. Создать программу, которая будет сохранять введенные данные и считывать их с применением списков свойств.
+    Student *student = [[Student alloc] initWithName:@"Ivan" surname:@"Ivanov" age:28];
     
-    [Calculator calculate:Division with:[NSNumber numberWithInteger:10] and:[NSNumber numberWithInteger:3]];
+    [self writeStudent: student];
+    student = nil;
+    [self printStudent: student];
     
-    [Calculator calculate:RemainderOfDivision with:[NSNumber numberWithInteger:10] and:[NSNumber numberWithInteger:3]];
-    
-//     2. Добавить выполнение блоков в различные очереди: как с применением GCD, так и с помощью NSOperationQueue
-    
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_queue_t slow = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
-    dispatch_queue_t fast = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-    dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
-    
-    dispatch_sync(slow, ^{
-        [Calculator calculate:Division with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
-    });
-    
-    dispatch_sync(fast, ^{
-        [Calculator calculate:Multiplication with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
-    });
-    
-    dispatch_group_async(group, queue, ^{
-        [Calculator calculate:Sum with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
-    });
-    
-    dispatch_group_async(group, queue, ^{
-        [Calculator calculate:Subtraction with:[NSNumber numberWithInteger:30] and:[NSNumber numberWithInteger:3]];
-    });
-    
-    NSOperationQueue *current = [NSOperationQueue currentQueue];
-    NSOperationQueue *main = [NSOperationQueue mainQueue];
-    
-    [current addOperationWithBlock:^{
-        [Calculator calculate:Division with:[NSNumber numberWithInteger:50] and:[NSNumber numberWithInteger:5]];
-    }];  // если таким способом добавлять в очередь зависимость сделать не получится?
-    
-    [main addOperationWithBlock:^{
-        [Calculator calculate:Subtraction with:[NSNumber numberWithInteger:50] and:[NSNumber numberWithInteger:5]];
-    }];
+    student = [self readStudent];
+    [self printStudent: student];
     
 }
 
+//NSString* directory() {
+//    return [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"/student.txt"];
+//}
+
+- (NSString *)directory {
+    return self.directory = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"/student.txt"];
+}
     
+- (void)writeStudent:(Student *)student {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:student requiringSecureCoding:NO error:nil];
+    [data writeToFile:self.directory atomically:YES];
+    NSLog(@"Сохранено!");
+}
+
+- (Student*)readStudent {
+    NSLog(@"Прочитано!");
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:self.directory];
+}
+
+- (void)printStudent:(Student *)student {
+    NSLog(@"name - %@, surname - %@", student.name, student.surname);
+}
 
 
 
